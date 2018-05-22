@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Face Recognition App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .margin20{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid"style="padding-top: 140px;">
+ <div class="row">
+     <div class="col-md-3">
+         <div class="jumbotron">
+    <h2>Face Detector</h2>
+    <p>Select this for first time initialisation of your face and provide your face data</p>
+             <button type="submit" class="btn btn-primary"data-toggle="modal" data-target="#myModal">Detect Face</button>
+  </div>
+     </div>
+     <div class="col-md-3"><div class="jumbotron">
+    <h2>Trainer</h2>
+    <p>Train the machine with the face data provided by you so that machine can learn about you.</p>
+         <form action="/trainer/"><button type="submit" class="btn btn-primary">Train Data</button></form>
+  </div></div>
+     <div class="col-md-3">
+         <div class="jumbotron">
+    <h2>Recognize</h2>
+    <p>Select this to recognize any face whose data is already provided to the machine</p>
+             <form action ="/rec/"><button type="submit" class="btn btn-primary">Recognize Face</button></form>
+  </div>
+     </div>
+     <div class="col-md-3">
+         <div class="jumbotron">
+            <h2>Send Record</h2>
+            <p>Sends the the current day's attendence record to the HOD in the form of Email.</p>
+             <form action ="/sendmail/"><button type="submit" class="btn btn-primary">Send Emails</button></form>
+         </div>
+     </div>
+ </div>
+</div>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">User Details</h4>
+      </div>
+      <div class="modal-body">
+        <form method="POST"action="/face_detector/">
+              {% csrf_token %}
+          <input type="text" class="form-control margin20" id="usr" name="name"placeholder="Full Name"value={{ name }}>
+          <input type="text" class="form-control margin20" id="usr" name="email" placeholder="Email"value={{ email }}>
+          <input type="text" class="form-control margin20" id="usr" name="unique_id" placeholder="Unique_Id"value={{ unique_id }}>
+          <input type="text" class="form-control margin20" id="usr" name="number"placeholder="Phone Number" value={{ number }}>
+            <input type="text" class="form-control margin20" id="usr" name="department"placeholder="Department" value={{ department }}>
+          <button type="submit"style="background-color:#3897f0;font-weight:bold;" class="btn btn-primary btn-block">Register</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
